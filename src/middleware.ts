@@ -1,15 +1,10 @@
-import { createRouteMatcher, clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// The Protected routes are /courses/watch/{courseId} but /courses/{courseId} and /courses is not protected
-const isPublicRoutes = createRouteMatcher([
-  "/",
-  "/courses",
-  "/courses/[courseId]",
-]);
+const isProtectedRoute = createRouteMatcher(["/courses(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoutes(req)) {
-    auth.protect();
+  if (isProtectedRoute(req)) {
+    await auth.protect();
   }
 });
 
