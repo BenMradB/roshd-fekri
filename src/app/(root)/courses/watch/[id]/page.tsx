@@ -1,7 +1,7 @@
 import React from "react";
 
-const WatchCoursePage = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+const WatchCoursePage = ({ params }: { params: { id: string } }) => {
+  const { id } = params;
 
   console.log(id);
 
