@@ -122,6 +122,11 @@
   }
 }
 
+::placeholder {
+  font-size: 15px;
+  color: oklch(87.1% 0.006 286.286);
+}
+
 .primary-text {
   color: #092e24;
 }

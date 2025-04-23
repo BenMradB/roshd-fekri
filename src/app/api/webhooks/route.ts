@@ -14,6 +14,27 @@ export async function POST(req: NextRequest) {
     );
     console.log("Webhook payload:", evt.data);
 
+    if (eventType === "user.created") {
+      const {
+        email_addresses,
+        username,
+        first_name,
+        last_name,
+        image_url,
+        locked,
+        banned,
+      } = evt.data;
+
+      console.log("User created event details:");
+      console.log("Email addresses:", email_addresses);
+      console.log("Username:", username);
+      console.log("First name:", first_name);
+      console.log("Last name:", last_name);
+      console.log("Profile image URL:", image_url);
+      console.log("Locked:", locked);
+      console.log("Banned:", banned);
+    }
+
     return new Response("Webhook received", { status: 200 });
   } catch (err) {
     console.error("Error verifying webhook:", err);
