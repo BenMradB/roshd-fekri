@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Naskh_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const naskhArabic = Noto_Naskh_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const kufiArabic = Noto_Kufi_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["900"],
 });
 
 export const metadata: Metadata = {
@@ -23,12 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" dir="rtl">
+        <body
+          className={` ${naskhArabic.variable}
+        ${kufiArabic.variable}
+        antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
