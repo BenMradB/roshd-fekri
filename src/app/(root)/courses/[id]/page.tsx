@@ -1,8 +1,8 @@
 import React from "react";
 type Params = Promise<{ id: string }>;
 
-const CourseDetailsPage = ({ params }: { params: Params }) => {
-  const { id } = params;
+const CourseDetailsPage = async ({ params }: { params: Params }) => {
+  const { id } = await params;
 
   return <div>CourseDetailsPage for course ID : {id} </div>;
 };
