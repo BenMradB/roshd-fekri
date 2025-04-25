@@ -9,3 +9,18 @@ export type TPrayer = {
   prayer: string;
   time: string;
 };
+
+export type TUser = {
+  _id: string;
+  clerkId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  userName?: string;
+  avatar?: string;
+  locked: boolean;
+  banned: boolean;
+  role: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

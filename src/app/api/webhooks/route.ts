@@ -1,3 +1,5 @@
+import createUser from "@/server/actions/user/user.create";
+import { TCreateUserParams } from "@/types/action.params";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { NextRequest } from "next/server";
 
@@ -9,10 +11,7 @@ export async function POST(req: NextRequest) {
     // For this guide, log payload to console
     const { id } = evt.data;
     const eventType = evt.type;
-    console.log(
-      `Received webhook with ID ${id} and event type of ${eventType}`
-    );
-    console.log("Webhook payload:", evt.data);
+    console.log("Webhook event ID:", id);
 
     if (eventType === "user.created") {
       const {
@@ -25,14 +24,25 @@ export async function POST(req: NextRequest) {
         banned,
       } = evt.data;
 
-      console.log("User created event details:");
-      console.log("Email addresses:", email_addresses);
-      console.log("Username:", username);
-      console.log("First name:", first_name);
-      console.log("Last name:", last_name);
-      console.log("Profile image URL:", image_url);
-      console.log("Locked:", locked);
-      console.log("Banned:", banned);
+      const userData: TCreateUserParams = {
+        clerkId: id!,
+        email: email_addresses[0].email_address!,
+        firstName: first_name!,
+        lastName: last_name!,
+        userName: username!,
+        avatar: image_url!,
+        locked: locked,
+        banned: banned,
+      };
+
+      const result = await createUser(userData);
+
+      if (result.status === "error") {
+        console.error("Error creating user:", result.message);
+        return new Response(result.message, { status: 500 });
+      }
+
+      console.log("User created successfully:", result.data);
     }
 
     return new Response("Webhook received", { status: 200 });
