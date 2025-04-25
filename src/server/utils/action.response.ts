@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-interface ResponseInterface {
+export interface IResponse<T> {
   message: string;
   statusCode: number;
   status: "success" | "error";
-  data?: any;
+  data?: T;
 }
 
-const Response = (response: ResponseInterface) => ({
+const Response = <T>(response: IResponse<T>) => ({
   message: response.message,
   statusCode: response.statusCode,
   status: response.status,

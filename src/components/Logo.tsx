@@ -8,7 +8,7 @@ const Logo = () => {
       alt="logo"
       width={112}
       height={112}
-      className="w-32 h-3w-32 object-cover"
+      className="w-32 h-32 object-cover"
     />
   );
 };

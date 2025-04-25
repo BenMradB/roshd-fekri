@@ -1,26 +1,21 @@
+"use server";
 import UserModel from "@/server/models/user.moel";
 import { connectToDatabase } from "@/server/mongoose/connect.db";
-import Response from "@/server/utils/action.response";
+import Response, { IResponse } from "@/server/utils/action.response";
 import { TCreateUserParams } from "@/types/action.params";
 import { Error } from "mongoose";
+import { getUserByClerkId } from "./user.get";
+import { TUser } from "@/types/types";
 
-const findUserByClerkId = async (clerkId: string) => {
-  try {
-    const user = await UserModel.findOne({ clerkId });
-    return user;
-  } catch (error) {
-    console.error("Error finding user by clerkId:", error);
-    throw new Error("Failed to find user");
-  }
-};
-
-const createUser = async (params: TCreateUserParams) => {
+const createUser = async (
+  params: TCreateUserParams
+): Promise<IResponse<TUser>> => {
   try {
     await connectToDatabase();
 
-    const exists = await findUserByClerkId(params.clerkId);
+    const response: IResponse<TUser> = await getUserByClerkId(params.clerkId);
 
-    if (exists) {
+    if (response.status === "success" && response.data) {
       throw new Error("User already exists");
     }
 
@@ -30,7 +25,7 @@ const createUser = async (params: TCreateUserParams) => {
       status: "success",
       message: "User created successfully",
       statusCode: 201,
-      data: user,
+      data: JSON.parse(JSON.stringify(user)),
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
@@ -39,7 +34,6 @@ const createUser = async (params: TCreateUserParams) => {
       status: "error",
       message: error.message,
       statusCode: 500,
-      data: null,
     });
   }
 };

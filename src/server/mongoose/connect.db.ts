@@ -1,3 +1,4 @@
+"use server";
 import mongoose from "mongoose";
 
 let isConnected = false;
@@ -11,8 +12,6 @@ export const connectToDatabase = async () => {
     "<db_password>",
     process.env.MONGODB_PWD!
   );
-
-  console.log("URI", URI); // Log the URI to check if it's correct
 
   try {
     await mongoose.connect(URI, {
