@@ -8,7 +8,7 @@ export const connectToDatabase = async () => {
   if (isConnected) return console.info("Already Connected");
 
   const URI = process.env.MONGODB_URL.replace(
-    "<password>",
+    "<db_password>",
     process.env.MONGODB_PASSWORD!
   );
 
