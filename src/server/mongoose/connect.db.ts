@@ -1,25 +1,45 @@
 "use server";
 import mongoose from "mongoose";
 
-let isConnected = false;
-
 export const connectToDatabase = async () => {
-  if (!process.env.MONGODB_URL) return console.error("No URL provided");
+  // Validate environment variables
+  if (!process.env.MONGODB_URL) {
+    console.error(
+      "Error: MONGODB_URL is not defined in environment variables."
+    );
+    return;
+  }
+  if (!process.env.MONGODB_PWD) {
+    console.error(
+      "Error: MONGODB_PWD is not defined in environment variables."
+    );
+    return;
+  }
+  if (!process.env.DATABASE_NAME) {
+    console.error(
+      "Error: DATABASE_NAME is not defined in environment variables."
+    );
+    return;
+  }
 
-  if (isConnected) return console.info("Already Connected");
+  if (!mongoose.connection || mongoose.connection.readyState === 1) {
+    console.info("MongoDB is already connected.");
+    return;
+  }
 
+  // Replace placeholder in the URI
   const URI = process.env.MONGODB_URL.replace(
     "<db_password>",
-    process.env.MONGODB_PWD!
+    process.env.MONGODB_PWD
   );
 
   try {
+    // Connect to MongoDB
     await mongoose.connect(URI, {
-      dbName: process.env.DATABASE_NAME!,
+      dbName: process.env.DATABASE_NAME,
     });
-    isConnected = true;
-    console.info("MongoDB Connected");
+    console.info("MongoDB Connected Successfully.");
   } catch (error) {
-    console.log(error);
+    console.error("Error connecting to MongoDB:", error);
   }
 };

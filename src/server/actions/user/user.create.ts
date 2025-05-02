@@ -1,10 +1,10 @@
 "use server";
-import UserModel from "@/server/models/user.moel";
+import UserModel from "@/server/models/user.model";
+import { getUserByClerkId } from "@/server/actions/user/user.get";
 import { connectToDatabase } from "@/server/mongoose/connect.db";
 import Response, { IResponse } from "@/server/utils/action.response";
 import { TCreateUserParams } from "@/types/action.params";
 import { Error } from "mongoose";
-import { getUserByClerkId } from "./user.get";
 import { TUser } from "@/types/types";
 
 const createUser = async (

@@ -9,3 +9,12 @@ export type TCreateUserParams = {
   banned?: boolean;
   role?: string;
 };
+
+export type TCreateCourseParams = {
+  owner: string;
+  name: string;
+  description: string;
+  thumbnail?: string;
+  startDate: Date;
+  endDate: Date;
+};

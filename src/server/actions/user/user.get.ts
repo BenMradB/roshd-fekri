@@ -1,5 +1,5 @@
 "use server";
-import UserModel from "@/server/models/user.moel";
+import UserModel from "@/server/models/user.model";
 import { connectToDatabase } from "@/server/mongoose/connect.db";
 import Response, { IResponse } from "@/server/utils/action.response";
 import { TUser } from "@/types/types";
@@ -9,7 +9,6 @@ export const getUserByClerkId = async (
   clerkId: string
 ): Promise<IResponse<TUser>> => {
   try {
-    console.log("clerkId", clerkId);
     await connectToDatabase();
     const user = await UserModel.findOne({ clerkId });
 

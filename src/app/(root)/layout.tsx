@@ -16,6 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                   ولا تُحصى، وستشعر بالسكينة تملأ قلبك، والرضا يطمئن روحك.
       '
         actionText="اكتشف الدورات"
+        hrefLink="/courses"
       />
       {children}
       <Footer />

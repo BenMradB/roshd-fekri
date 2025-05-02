@@ -1,4 +1,5 @@
-import { TNavbarItem } from "@/types/types";
+import { TNavbarItem, TSidebarItem } from "@/types/types";
+import { BookCopy, UserCog, MessageCircleMore } from "lucide-react";
 
 export const PrayerTimesURL = "https://api.aladhan.com/v1/timings";
 export const navigationBarItems: TNavbarItem[] = [
@@ -8,18 +9,39 @@ export const navigationBarItems: TNavbarItem[] = [
     id: 1,
   },
   {
-    title: "القرآن",
-    url: "/quran",
+    title: "الدروس",
+    url: "/courses",
     id: 2,
   },
   {
-    title: "الأذكار",
-    url: "/adhkar",
+    title: "من نحن",
+    url: "/about-us",
     id: 3,
   },
   {
-    title: "التقويم",
-    url: "/calendar",
+    title: "اتصل بنا",
+    url: "/contact-us",
     id: 4,
+  },
+];
+
+export const adminSidebarItems: TSidebarItem[] = [
+  {
+    title: "الدروس",
+    url: "/admin/courses",
+    id: 1,
+    icon: BookCopy,
+  },
+  {
+    title: "المستخدمين",
+    url: "/admin/users",
+    id: 2,
+    icon: UserCog,
+  },
+  {
+    title: "التعليقات",
+    url: "/admin/comments",
+    id: 3,
+    icon: MessageCircleMore,
   },
 ];

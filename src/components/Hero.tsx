@@ -5,6 +5,8 @@ import Header from "./Header";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useIslamicTimes } from "@/hooks/useIslamicTimes";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 const staticImages = [
   "/images/hero-1.jpeg",
   "/images/hero-2.jpg",
@@ -18,9 +20,19 @@ interface Props {
   title: string;
   subTitle: string;
   actionText: string;
+  hrefLink?: string;
+  onClick?: () => void;
 }
 
-const Hero = ({ images = [], title, subTitle, actionText }: Props) => {
+const Hero = ({
+  images = [],
+  title,
+  subTitle,
+  actionText,
+  onClick,
+  hrefLink,
+}: Props) => {
+  const router = useRouter();
   const heroImages: string[] = images.length ? images : staticImages;
   const { islamicTimings } = useIslamicTimes();
   return (
@@ -41,7 +53,11 @@ const Hero = ({ images = [], title, subTitle, actionText }: Props) => {
                 {subTitle}
               </p>
             </div>
-            <Button className="w-1/2 !py-8 secondary-bg font-bold text-lg text-black rounded-full cursor-pointer">
+
+            <Button
+              onClick={() => (hrefLink ? router.push(hrefLink) : onClick!())}
+              className="w-1/2 !py-8 secondary-bg font-bold text-lg text-black rounded-full cursor-pointer"
+            >
               {actionText}{" "}
             </Button>
           </div>
