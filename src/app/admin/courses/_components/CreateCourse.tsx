@@ -1,9 +1,8 @@
 "use client";
 import * as React from "react";
-import { format } from "date-fns";
 import { CalendarIcon, LoaderPinwheel, XIcon } from "lucide-react";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -60,7 +59,8 @@ const CreateCourse = ({
       name: "",
       description: "",
       startDate: new Date(),
-      endDate: new Date(),
+      // default endDate to 3 days from now
+      endDate: new Date(new Date().setDate(new Date().getDate() + 3)),
     },
   });
   const { isSubmitting, isValid } = form.formState;
@@ -196,10 +196,12 @@ const CreateCourse = ({
                                   "text-muted-foreground"
                               )}
                             >
-                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              <CalendarIcon className="mr-2 h-4 w-4 text-[#092e24]" />
                               {form.getValues("startDate") ? (
                                 <p className="text-[#092e24] text-sm font-extrabold">
-                                  {format(form.getValues("startDate"), "PPP")}
+                                  {formatDate(
+                                    new Date(form.getValues("startDate"))
+                                  )}
                                 </p>
                               ) : (
                                 <span>
@@ -253,7 +255,9 @@ const CreateCourse = ({
                               <CalendarIcon className="mr-2 h-4 w-4 text-[#092e24]" />
                               {form.getValues("endDate") ? (
                                 <p className="text-[#092e24] text-sm font-extrabold">
-                                  {format(form.getValues("endDate"), "PPP")}
+                                  {formatDate(
+                                    new Date(form.getValues("endDate"))
+                                  )}
                                 </p>
                               ) : (
                                 <span>

@@ -1,4 +1,5 @@
 "use client";
+import { formatDate } from "@/lib/utils";
 import { TCourse } from "@/types/types";
 import Image from "next/image";
 import React from "react";
@@ -8,8 +9,9 @@ type Props = {
 };
 
 const CourseCard = ({ course }: Props) => {
+  console.log(typeof course.startDate);
   return (
-    <div className="!w-[300px] h-[400px] border-1 border-[#092e24]/50 rounded-t-md  flex flex-col justify-between hover:bg-[#092e24]/5 cursor-pointer">
+    <div className="w-full h-[400px] border-1 border-[#092e24]/50 rounded-t-md  flex flex-col justify-between hover:bg-[#092e24]/5 cursor-pointer">
       <div className="w-full flex flex-col gap-y-2 p-2">
         <Image
           src={
@@ -28,7 +30,12 @@ const CourseCard = ({ course }: Props) => {
       </div>
 
       <div className="w-full h-[60px] flex items-center p-2 justify-between border-t-2 border-[#092e24]/50 ">
-        footer
+        <p className="text-sm font-semibold tracking-wide text-green-700">
+          {formatDate(new Date(course.startDate))}
+        </p>
+        <p className="text-sm font-semibold tracking-wide text-red-700">
+          {formatDate(new Date(course.endDate))}
+        </p>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ const AdminListCoursesPage = async () => {
 
   if (!user) return redirect("/sign-in");
   return (
-    <div className="w-full h-full relative overflow-auto">
+    <div className="w-full h-full relative overflow-auto p-4">
       {courses.length ? (
         <CoursesList courses={courses} user={user!} />
       ) : (
