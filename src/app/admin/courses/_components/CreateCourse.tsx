@@ -116,7 +116,7 @@ const CreateCourse = ({
       </Button>
       <div
         className={cn(
-          "hidden w-full min-h-[80%] p-10  border-2 border-[#092e24] absolute top-1/2 left-1/2 -translate-1/2 bg-accent/70  !z-50",
+          "hidden w-full h-fit p-10  border-2 border-[#092e24] absolute top-0 left-1/2 -translate-x-1/2 bg-accent/70  !z-50",
           isCreatingCourse && "animate-fadeIn block"
         )}
       >

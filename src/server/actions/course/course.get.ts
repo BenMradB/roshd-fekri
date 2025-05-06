@@ -44,7 +44,7 @@ export const getAllCourses = async (): Promise<IResponse<TCourse[]>> => {
 
 export const getCourseById = async (
   id: string
-): Promise<IResponse<TCourse[]>> => {
+): Promise<IResponse<TCourse>> => {
   try {
     await connectToDatabase();
 

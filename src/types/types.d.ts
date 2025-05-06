@@ -92,3 +92,5 @@ export type TCourse = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type TLectureType = "text" | "image" | "video" | "audio" | "pdf" | null;

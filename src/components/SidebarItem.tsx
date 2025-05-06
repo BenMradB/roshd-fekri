@@ -11,7 +11,7 @@ type Props = {
 
 const SidebarItem = ({ item: { title, url, icon: Icon } }: Props) => {
   const pathname = usePathname();
-  const isActive = pathname === url;
+  const isActive = pathname === url || pathname.includes(url);
   return (
     <Link
       href={url}

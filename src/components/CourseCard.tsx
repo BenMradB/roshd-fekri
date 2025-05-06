@@ -2,6 +2,7 @@
 import { formatDate } from "@/lib/utils";
 import { TCourse } from "@/types/types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -11,7 +12,10 @@ type Props = {
 const CourseCard = ({ course }: Props) => {
   console.log(typeof course.startDate);
   return (
-    <div className="w-full h-[400px] border-1 border-[#092e24]/50 rounded-t-md  flex flex-col justify-between hover:bg-[#092e24]/5 cursor-pointer">
+    <Link
+      href={`/admin/courses/manage/${course._id}`}
+      className="w-full h-[400px] border-1 border-[#092e24]/50 rounded-t-md  flex flex-col justify-between hover:bg-[#092e24]/5 cursor-pointer"
+    >
       <div className="w-full flex flex-col gap-y-2 p-2">
         <Image
           src={
@@ -37,7 +41,7 @@ const CourseCard = ({ course }: Props) => {
           {formatDate(new Date(course.endDate))}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
