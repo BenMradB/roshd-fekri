@@ -54,7 +54,7 @@ const CustomAuthForm = ({ action }: Props) => (
             </Clerk.Field>
           </div>
 
-          <div id="clerk-captcha"></div>
+          <SignUp.Captcha className="" />
 
           <SignUp.Action
             submit
@@ -139,7 +139,7 @@ const CustomAuthForm = ({ action }: Props) => (
             </Clerk.Field>
           </div>
 
-          <div id="clerk-captcha"></div>
+          {/* <SignIn.Captcha className="" /> */}
 
           <SignIn.Action
             submit

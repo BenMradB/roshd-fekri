@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+// "https://o33fe1biak.ufs.sh/f/Y6EIdYwAq5sgy4J3GuvRVJd4HwCE8YOnopkrQu0IgiZSzc12"
+
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -12,6 +14,7 @@ const nextConfig: NextConfig = {
       "miro.medium.com",
       "encrypted-tbn0.gstatic.com",
       "assets.aceternity.com",
+      "o33fe1biak.ufs.sh",
     ],
   },
 };

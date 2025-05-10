@@ -1,10 +1,9 @@
 import React from "react";
-import LectureContent from "./_components/LectureContent";
 import { TCourse } from "@/types/types";
 import { IResponse } from "@/server/utils/action.response";
 import { getCourseById } from "@/server/actions/course/course.get";
-import { toast } from "sonner";
 import CreateSection from "./_components/CreateSection";
+import Section from "./_components/Section";
 type Params = Promise<{ id: string }>;
 
 const ManageCoursePage = async ({ params }: { params: Params }) => {
@@ -14,7 +13,6 @@ const ManageCoursePage = async ({ params }: { params: Params }) => {
   try {
     const response: IResponse<TCourse> = await getCourseById(id);
     if (response.status === "error") {
-      toast.error(response.message);
       throw new Error(response.message);
     }
 
@@ -34,18 +32,18 @@ const ManageCoursePage = async ({ params }: { params: Params }) => {
   return (
     <div className="w-full h-full overflow-auto relative  p-10 flex flex-col gap-4 group/manageCourse">
       <div className="w-full h-fit flex flex-col gap-4 relative group-hover/group/manageCourse:blur-sm">
-        <div className="w-full flex items-center justify-between">
-          <h1 className="text-5xl font-extrabold">
+        <div className="w-full flex items-center justify-between gap-8">
+          <h1 className="text-5xl font-extrabold w-full  wrap-break-word">
             {/* in arabic */}
             {course.name}
           </h1>
-          <CreateSection className="" />
+          <CreateSection course={course} />
         </div>
         <p className="font-light text-md leading-6">{course.description}</p>
       </div>
-      <LectureContent course={course} />
-      <LectureContent course={course} />
-      <LectureContent course={course} />
+      {course.sections.map((section) => (
+        <Section section={section} key={section._id} />
+      ))}
     </div>
   );
 };

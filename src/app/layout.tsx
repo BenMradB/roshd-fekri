@@ -3,6 +3,9 @@ import { Noto_Naskh_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 
 const naskhArabic = Noto_Naskh_Arabic({
   variable: "--font-arabic",
@@ -34,6 +37,7 @@ export default function RootLayout({
         ${kufiArabic.variable}
         antialiased`}
         >
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           {children}
           <Toaster />
         </body>

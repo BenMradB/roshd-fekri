@@ -1,7 +1,9 @@
 "use server";
 
 import CommentModel from "@/server/models/comment.model";
+import ContentModel from "@/server/models/content.lecture.model";
 import CourseModel from "@/server/models/course.model";
+import LectureModel from "@/server/models/lecture.model";
 import SectionModel from "@/server/models/section.course";
 import { connectToDatabase } from "@/server/mongoose/connect.db";
 import Response, { IResponse } from "@/server/utils/action.response";
@@ -20,11 +22,11 @@ export const getAllCourses = async (): Promise<IResponse<TCourse[]>> => {
       .populate("comments");
 
     if (!courses)
-      return {
+      return Response({
         status: "error",
         message: "Failed to fetch courses",
         statusCode: 500,
-      };
+      });
 
     return Response({
       status: "success",
@@ -34,11 +36,11 @@ export const getAllCourses = async (): Promise<IResponse<TCourse[]>> => {
     });
   } catch (error) {
     console.error("Error creating course:", error);
-    return {
+    return Response({
       status: "error",
       message: "Failed to fetch courses",
       statusCode: 500,
-    };
+    });
   }
 };
 
@@ -58,9 +60,18 @@ export const getCourseById = async (
 
     await SectionModel.find();
     await CommentModel.find();
+    await LectureModel.find();
+    await ContentModel.find();
     const course = await CourseModel.findById(id)
       .populate("owner")
-      .populate("sections")
+      .populate({
+        path: "sections",
+        model: "Section",
+        populate: [
+          { path: "lectures", model: "Lecture", populate: "content" },
+          { path: "course", model: "Course" },
+        ],
+      })
       .populate("users")
       .populate("comments");
 

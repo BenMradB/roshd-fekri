@@ -3,8 +3,14 @@ import { models, model, Schema, Types } from "mongoose";
 const lectureSection = new Schema(
   {
     content: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Content",
+    },
+
+    description: {
+      type: String,
+      required: false,
+      default: "",
     },
 
     position: {

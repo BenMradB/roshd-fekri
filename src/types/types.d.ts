@@ -63,7 +63,6 @@ export type TLectureContent = {
   audio?: string;
   video?: string;
   pdf?: string;
-  lecture: TLecture;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -71,6 +70,7 @@ export type TLectureContent = {
 export type TLecture = {
   _id: string;
   content: TLectureContent;
+  description?: string;
   position: number;
   section: TSection;
   createdAt: Date;

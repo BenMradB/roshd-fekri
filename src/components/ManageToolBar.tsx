@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { FloatingDock } from "@/components/ui/floating-dock";
 import { IconHome } from "@tabler/icons-react";
 import { IoImages } from "react-icons/io5";
 import { MdSlowMotionVideo } from "react-icons/md";
@@ -8,80 +7,85 @@ import { LuAudioLines } from "react-icons/lu";
 import { FaFilePdf } from "react-icons/fa6";
 import { CiText } from "react-icons/ci";
 import { cn } from "@/lib/utils";
-import { TLectureType } from "@/types/types";
+import { Button } from "./ui/button";
+import { ContentType } from "@/server/models/content.lecture.model";
 
 const links: {
   title: string;
   icon: React.ReactNode;
-  type: TLectureType;
+  type: ContentType | null;
 }[] = [
   {
     title: "Home",
     type: null,
     icon: (
-      <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <IconHome className="size-[25px]  cursor-pointer text-neutral-500 dark:text-neutral-300" />
     ),
   },
 
   {
     title: "Image Content",
-    type: "image",
+    type: ContentType.IMAGE,
     icon: (
-      <IoImages className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <IoImages className="size-[25px] cursor-pointer text-neutral-500 dark:text-neutral-300" />
     ),
   },
   {
     title: "Video Content",
-    type: "video",
+    type: ContentType.VIDEO,
     icon: (
-      <MdSlowMotionVideo className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <MdSlowMotionVideo className="size-[25px]  cursor-pointer text-neutral-500 dark:text-neutral-300" />
     ),
   },
   {
     title: "Audio Content",
-    type: "audio",
+    type: ContentType.AUDIO,
     icon: (
-      <LuAudioLines className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <LuAudioLines className="size-[25px] cursor-pointer  text-neutral-500 dark:text-neutral-300" />
     ),
   },
 
   {
     title: "PDF Document",
-    type: "pdf",
+    type: ContentType.PDF,
     icon: (
-      <FaFilePdf className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <FaFilePdf className="size-[25px]  cursor-pointer text-neutral-500 dark:text-neutral-300" />
     ),
   },
 
   {
     title: "Text Content",
-    type: "text",
+    type: ContentType.TEXT,
     icon: (
-      <CiText className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      <CiText className="size-[25px]  cursor-pointer text-neutral-500 dark:text-neutral-300" />
     ),
   },
 ];
 
 type Props = {
   className?: string;
-  setSelectedType: (type: TLectureType) => void;
+  setSelectedType: (type: ContentType | null) => void;
 };
 
 const ManageToolBar = ({ className, setSelectedType }: Props) => {
   return (
     <div
       className={cn(
-        "flex items-center justify-center w-full absolute bottom-0 left-1/2 -translate-x-1/2",
+        "items-center justify-center gap-2 w-fit absolute top-0 left-0",
         className
       )}
     >
-      <FloatingDock
-        desktopClassName="cursor-pointer bg-transparent p-0"
-        items={links}
-        onSelectTypeHandler={(type: TLectureType) => {
-          setSelectedType(type);
-        }}
-      />
+      {links.map((link) => (
+        <Button
+          className="size-[25px] !p-5 rounded-full  cursor-pointer bg-[#092e24]/5 hover:bg-[#092e24]/10"
+          key={link.title}
+          onClick={() => {
+            setSelectedType(link.type);
+          }}
+        >
+          {link.icon}
+        </Button>
+      ))}
     </div>
   );
 };

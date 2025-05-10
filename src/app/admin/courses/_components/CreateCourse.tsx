@@ -140,7 +140,7 @@ const CreateCourse = ({
                 render={({ field }) => (
                   <FormItem>
                     <div className="w-full flex flex-col gap-4">
-                      <FormLabel className="text-[#092e24] font-extrabold text-xl">
+                      <FormLabel className="text-[#092e24] font-extrabold text-2xl uppercase">
                         {" "}
                         اسم الدورة <span className="text-red-600">*</span>
                       </FormLabel>

@@ -14,6 +14,7 @@ const sectionSchema = new Schema(
       {
         type: Types.ObjectId,
         ref: "Lecture",
+        default: [],
       },
     ],
     course: {

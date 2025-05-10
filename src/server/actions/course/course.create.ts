@@ -15,21 +15,21 @@ export const createCourse = async (
     const { owner, name, description, startDate, endDate } = params;
 
     if (!owner || !name || !description || !startDate || !endDate) {
-      return {
+      return Response({
         status: "error",
         message: "Missing required fields",
         statusCode: 400,
-      };
+      });
     }
 
     const newCourse = await CourseModel.create(params);
 
     if (!newCourse) {
-      return {
+      return Response({
         status: "error",
         message: "Failed to create course",
         statusCode: 500,
-      };
+      });
     }
 
     return Response({
@@ -40,10 +40,10 @@ export const createCourse = async (
     });
   } catch (error) {
     console.error("Error creating course:", error);
-    return {
+    return Response({
       status: "error",
       message: "Failed to create course",
       statusCode: 500,
-    };
+    });
   }
 };

@@ -1,4 +1,4 @@
-import { models, model, Schema, Types } from "mongoose";
+import { models, model, Schema } from "mongoose";
 
 export enum ContentType {
   TEXT = "text",
@@ -35,12 +35,6 @@ const contentSchema = new Schema(
     pdf: {
       type: String,
       default: "",
-    },
-
-    lecture: {
-      type: Types.ObjectId,
-      ref: "Lecture",
-      required: true,
     },
   },
   {
